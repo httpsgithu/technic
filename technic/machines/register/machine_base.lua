@@ -160,7 +160,8 @@ function technic.register_base_machine(data)
 		tentry = ""
 	end
 
-	minetest.register_node(data.modname..":"..ltier.."_"..machine_name, {
+	local node_name = data.modname..":"..ltier.."_"..machine_name
+	core.register_node(node_name, {
 		description = machine_desc_tier,
 		tiles = {
 			data.modname.."_"..ltier.."_"..machine_name.."_top.png"..tentry,
@@ -231,7 +232,7 @@ function technic.register_base_machine(data)
 		end,
 	})
 
-	minetest.register_node(data.modname..":"..ltier.."_"..machine_name.."_active",{
+	core.register_node(node_name .. "_active",{
 		description = machine_desc_tier,
 		tiles = {
 			data.modname.."_"..ltier.."_"..machine_name.."_top.png"..tentry,
@@ -276,8 +277,9 @@ function technic.register_base_machine(data)
 		end,
 	})
 
-	technic.register_machine(tier, data.modname..":"..ltier.."_"..machine_name,            technic.receiver)
-	technic.register_machine(tier, data.modname..":"..ltier.."_"..machine_name.."_active", technic.receiver)
+	technic.register_machine(tier, node_name,              technic.receiver)
+	technic.register_machine(tier, node_name .. "_active", technic.receiver)
+	technic._register_crafting_tool(typename, node_name)
 
 end -- End registration
 

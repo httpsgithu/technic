@@ -78,6 +78,8 @@ minetest.register_node("technic:coal_alloy_furnace_active", {
 	allow_metadata_inventory_move = technic.machine_inventory_move,
 })
 
+technic._register_crafting_tool("alloy", "technic:coal_alloy_furnace")
+
 minetest.register_abm({
 	label = "Machines: run coal alloy furnace",
 	nodenames = {"technic:coal_alloy_furnace", "technic:coal_alloy_furnace_active"},
