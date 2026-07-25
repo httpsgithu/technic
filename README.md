@@ -41,6 +41,25 @@ Machine and tool descriptions can be found on the **[GitHub Wiki](https://github
 For modders: **[Technic Lua API](technic/doc/api.md)**
 
 
+### World-specific settings
+
+World-specific settings can be specified in the file `??/worlds/WORLDNAME/technic.conf` (optional).
+Due to mod security checks, can be no defaults file to parse. To avoid duplication, please
+find the available settings here:
+
+* See [technic/config.lua](technic/config.lua)
+* See [technic_worldgen/config.lua](technic_worldgen/config.lua)
+
+The `technic.conf` file uses the `Settings` format as defined in
+[Luanti / lua_api.md](https://github.com/luanti-org/luanti/blob/5.16.1/doc/lua_api.md?plain=1#L9688-L9698).
+
+**Example**
+
+	enable_wind_mill = true
+	enable_flashlight = true
+	enable_granite_generation = false
+
+
 ## License
 
 Unless otherwise stated, all components of this modpack are licensed under the
