@@ -234,7 +234,7 @@ function technic.trace_node_ray_fat(pos, dir, range)
 end
 
 local S = technic.getter
-function technic._get_desc_formatter(name, status)
+function technic._get_desc_formatter(name)
 	return function(status)
 		return status and S("@1@nStatus: @2", name, status) or name
 	end

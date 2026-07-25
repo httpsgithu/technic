@@ -58,7 +58,7 @@ end
 
 local can_dig
 
-if technic_cnc.use_technic then
+if technic then
 	get_description = technic._get_desc_formatter(S("@1 CNC Machine", "LV"))
 
 	minetest.register_craft({
@@ -71,7 +71,13 @@ if technic_cnc.use_technic then
 	})
 	can_dig = technic.machine_can_dig
 else
-	get_description = technic._get_desc_formatter(S("CNC Machine"))
+	-- Copy of 'technic._get_desc_formatter'
+	local function _get_desc_formatter(name)
+		return function(status)
+			return status and S("@1@nStatus: @2", name, status) or name
+		end
+	end
+	get_description = _get_desc_formatter(S("CNC Machine"))
 
 	minetest.register_craft({
 		output = 'technic:cnc',
@@ -236,7 +242,7 @@ local function form_handler(pos, formname, fields, sender)
 	end
 
 	-- Each click = craft one
-	if not technic_cnc.use_technic then
+	if not technic then
 		local result = cnc_step_get_result(meta, inv)
 		if result then
 			cnc_step_execute(meta, inv, result)
@@ -298,11 +304,11 @@ minetest.register_node(":technic:cnc", {
 	allow_metadata_inventory_take = allow_metadata_inventory_take,
 	allow_metadata_inventory_move = allow_metadata_inventory_move,
 	on_receive_fields = form_handler,
-	technic_run = technic_cnc.use_technic and run,
+	technic_run = technic and run,
 })
 
 -- Active state block
-if technic_cnc.use_technic then
+if technic then
 
 	minetest.register_node(":technic:cnc_active", {
 		description = get_description(nil),
